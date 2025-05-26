@@ -10,51 +10,69 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             if (isNotAgedOrBackstagePasses(item)) {
+                reduceQualityForItem(item);
+            } else {
+                increaseQualityForItem(item);
+            }
+
+            updateQualityForSulfuras(item);
+
+            if (item.sellIn < 0) {
+                expiredSellIn(item);
+            }
+        }
+    }
+
+    private void expiredSellIn(Item item) {
+        if (!isAged(item)) {
+            if (!isBackstage(item)) {
                 if (item.quality > 0) {
                     if (!isSulfuras(item)) {
                         reduceQuality(item);
                     }
                 }
             } else {
+                item.quality = 0;
+            }
+        } else {
+            if (item.quality < 50) {
+                increaseQuality(item);
+            }
+        }
+    }
+
+    private void updateQualityForSulfuras(Item item) {
+        if (!isSulfuras(item)) {
+            item.sellIn = item.sellIn - 1;
+        }
+    }
+
+    private void increaseQualityForItem(Item item) {
+        if (item.quality < 50) {
+            increaseQuality(item);
+            increaseQualityItemBackstage(item);
+        }
+    }
+
+    private void increaseQualityItemBackstage(Item item) {
+        if (isBackstage(item)) {
+            if (item.sellIn < 11) {
                 if (item.quality < 50) {
                     increaseQuality(item);
-
-                    if (isBackstage(item)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                increaseQuality(item);
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                increaseQuality(item);
-                            }
-                        }
-                    }
                 }
             }
 
+            if (item.sellIn < 6) {
+                if (item.quality < 50) {
+                    increaseQuality(item);
+                }
+            }
+        }
+    }
+    private void reduceQualityForItem(Item item) {
+        if (item.quality > 0) {
             if (!isSulfuras(item)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!isAged(item)) {
-                    if (!isBackstage(item)) {
-                        if (item.quality > 0) {
-                            if (!isSulfuras(item)) {
-                                reduceQuality(item);
-                            }
-                        }
-                    } else {
-                        item.quality = 0;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        increaseQuality(item);
-                    }
-                }
+                reduceQuality(item);
             }
         }
     }

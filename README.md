@@ -7,3 +7,5 @@
 2: Se anadieron varios metodos para las condiciones de los if, para ayudar con la legibilidad y la mantenibilidad
 3: Se cambio la linea 'items[i].quality - items[i].quality' por '0' y se cambio el for inicial por un foreach, para 
 ayudar con la legibilidad
+4: Se crearon varios metodos para encapsular las reglas del negocio para aplicar los principios de KISS, Legibilidad, 
+Mantenibilidad, y retutilizacion de componentes.
