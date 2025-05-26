@@ -9,3 +9,5 @@
 ayudar con la legibilidad
 4: Se crearon varios metodos para encapsular las reglas del negocio para aplicar los principios de KISS, Legibilidad, 
 Mantenibilidad, y retutilizacion de componentes.
+5. Se creao una interfaz IQualityService y un servicio que implementa la interfaz QualityServiceImpl para lograr mayor 
+modularizacion y menor acoplacion
