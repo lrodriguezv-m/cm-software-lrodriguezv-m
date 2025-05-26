@@ -8,51 +8,51 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (isNotAgedOrBackstagePasses(items[i])) {
-                if (items[i].quality > 0) {
-                    if (!isSulfuras(items[i])) {
-                        reduceQuality(items[i]);
+        for (Item item : items) {
+            if (isNotAgedOrBackstagePasses(item)) {
+                if (item.quality > 0) {
+                    if (!isSulfuras(item)) {
+                        reduceQuality(item);
                     }
                 }
             } else {
-                if (items[i].quality < 50) {
-                    increaseQuality(items[i]);
+                if (item.quality < 50) {
+                    increaseQuality(item);
 
-                    if (isBackstage(items[i])) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                increaseQuality(items[i]);
+                    if (isBackstage(item)) {
+                        if (item.sellIn < 11) {
+                            if (item.quality < 50) {
+                                increaseQuality(item);
                             }
                         }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                increaseQuality(items[i]);
+                        if (item.sellIn < 6) {
+                            if (item.quality < 50) {
+                                increaseQuality(item);
                             }
                         }
                     }
                 }
             }
 
-            if (!isSulfuras(items[i])) {
-                items[i].sellIn = items[i].sellIn - 1;
+            if (!isSulfuras(item)) {
+                item.sellIn = item.sellIn - 1;
             }
 
-            if (items[i].sellIn < 0) {
-                if (!isAged(items[i])) {
-                    if (!isBackstage(items[i])) {
-                        if (items[i].quality > 0) {
-                            if (!isSulfuras(items[i])) {
-                                reduceQuality(items[i]);
+            if (item.sellIn < 0) {
+                if (!isAged(item)) {
+                    if (!isBackstage(item)) {
+                        if (item.quality > 0) {
+                            if (!isSulfuras(item)) {
+                                reduceQuality(item);
                             }
                         }
                     } else {
-                        items[i].quality = items[i].quality - items[i].quality;
+                        item.quality = 0;
                     }
                 } else {
-                    if (items[i].quality < 50) {
-                        increaseQuality(items[i]);
+                    if (item.quality < 50) {
+                        increaseQuality(item);
                     }
                 }
             }
